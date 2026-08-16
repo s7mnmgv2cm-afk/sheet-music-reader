@@ -6,7 +6,7 @@
     <title>五線譜視奏練習 (Sheet Music Reader)</title>
     <meta name="description" content="練習認識五線譜音符的網頁應用程式">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
     <div class="app-container">
@@ -37,6 +37,18 @@
                 <label class="control-label checkbox-label">
                     <input type="checkbox" id="accidentals-checkbox" checked>
                     <span>包含升降記號</span>
+                </label>
+                <div style="flex-basis: 100%; height: 0;"></div>
+                <label class="control-label">
+                    <span>作答介面：</span>
+                    <select id="input-mode-select">
+                        <option value="piano">鋼琴鍵盤 (Piano)</option>
+                        <option value="guitar">吉他指板 (Guitar)</option>
+                    </select>
+                </label>
+                <label class="control-label checkbox-label" id="show-notes-container" style="display: none;">
+                    <input type="checkbox" id="show-notes-checkbox" checked>
+                    <span>顯示指板音名</span>
                 </label>
                 <button id="cheat-sheet-btn" class="secondary-btn" style="margin-left: auto;">📖 音符對照表</button>
             </div>
@@ -69,6 +81,10 @@
                     <div class="piano-key white" data-note="A" data-accidental="n"><span class="key-label">A<br><small>La</small></span></div>
                     <div class="piano-key black a-sharp" data-note="A" data-accidental="#"><span class="key-label">A♯<br><small>B♭</small></span></div>
                     <div class="piano-key white" data-note="B" data-accidental="n"><span class="key-label">B<br><small>Si</small></span></div>
+                </div>
+
+                <div class="guitar-fretboard hidden" id="guitar-fretboard">
+                    <!-- Fretboard generated via JS -->
                 </div>
 
                 <button class="submit-btn" id="submit-btn" disabled>確認答案 (Check)</button>
@@ -137,6 +153,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="app.v13.js"></script>
+    <script src="app.v14.js"></script>
 </body>
 </html>

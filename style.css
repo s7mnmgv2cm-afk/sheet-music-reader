@@ -227,6 +227,10 @@ main {
     box-shadow: inset 0 -4px 0 #000, 0 8px 16px rgba(0,0,0,0.2);
 }
 
+.piano-keyboard.hidden {
+    display: none;
+}
+
 .piano-key {
     cursor: pointer;
     transition: background-color 0.1s;
@@ -299,6 +303,101 @@ main {
 .piano-key.black.f-sharp { left: calc(100% / 7 * 4); }
 .piano-key.black.g-sharp { left: calc(100% / 7 * 5); }
 .piano-key.black.a-sharp { left: calc(100% / 7 * 6); }
+
+/* Guitar Fretboard */
+.guitar-fretboard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #3b2f2f;
+    border-radius: 4px;
+    padding: 10px 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 16px rgba(0,0,0,0.2);
+    position: relative;
+    user-select: none;
+}
+
+.guitar-fretboard.hidden {
+    display: none;
+}
+
+.guitar-string {
+    display: flex;
+    height: 36px;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+}
+
+.guitar-string:nth-child(1) { border-bottom-width: 1px; }
+.guitar-string:nth-child(2) { border-bottom-width: 1.5px; }
+.guitar-string:nth-child(3) { border-bottom-width: 2px; }
+.guitar-string:nth-child(4) { border-bottom-width: 2.5px; border-bottom-color: rgba(255,255,255,0.6); }
+.guitar-string:nth-child(5) { border-bottom-width: 3px; border-bottom-color: rgba(255,255,255,0.7); }
+.guitar-string:nth-child(6) { border-bottom-width: 4px; border-bottom-color: rgba(255,255,255,0.8); }
+
+.guitar-fret {
+    flex: 1;
+    border-right: 3px solid #b8b8b8;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.1s;
+}
+
+.guitar-fret.open-string {
+    flex: 0.5;
+    border-right: 8px solid #f5f5dc; /* Nut */
+    background-color: #222;
+}
+
+.guitar-fret:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+
+.guitar-fret.selected {
+    background-color: rgba(59, 130, 246, 0.4);
+    box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.8);
+}
+
+/* Fret markers (inlays) */
+.fret-marker {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+.fret-note-label {
+    z-index: 1;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: rgba(0,0,0,0.6);
+    padding: 2px 6px;
+    border-radius: 12px;
+    pointer-events: none;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.hide-notes .fret-note-label {
+    opacity: 0;
+}
+.hide-notes .guitar-fret.selected .fret-note-label {
+    opacity: 1; /* Always show note when selected */
+}
 
 .submit-btn {
     width: 100%;
