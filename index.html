@@ -6,7 +6,7 @@
     <title>五線譜視奏練習 (Sheet Music Reader)</title>
     <meta name="description" content="練習認識五線譜音符的網頁應用程式">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
     <div class="app-container">
@@ -37,6 +37,13 @@
                 <label class="control-label checkbox-label">
                     <input type="checkbox" id="accidentals-checkbox" checked>
                     <span>包含升降記號</span>
+                </label>
+                <label class="control-label">
+                    <span>題目長度：</span>
+                    <select id="length-select">
+                        <option value="single">單音 (Single)</option>
+                        <option value="measure">一小節 (Measure)</option>
+                    </select>
                 </label>
                 <div style="flex-basis: 100%; height: 0;"></div>
                 <label class="control-label">
@@ -88,8 +95,6 @@
                         <!-- Fretboard generated via JS -->
                     </div>
                 </div>
-
-                <button class="submit-btn" id="submit-btn" disabled>確認答案 (Check)</button>
             </div>
             
             <div class="history-area" id="history-area">
@@ -121,8 +126,10 @@
                         </select>
                     </label>
                 </div>
-                <div class="staff-container" id="cheat-sheet-staff" style="margin: 1rem 0;">
-                    <!-- VexFlow cheat sheet will render here -->
+                <div class="cheat-sheet-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0;">
+                    <div id="cheat-sheet-staff" style="min-width: 600px; display: flex; justify-content: center; padding-bottom: 10px;">
+                        <!-- VexFlow cheat sheet will render here -->
+                    </div>
                 </div>
                 <button id="close-cheat-sheet-btn" class="primary-btn">關閉</button>
             </div>
@@ -155,6 +162,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="app.v16.js"></script>
+    <script src="app.v18.js"></script>
 </body>
 </html>
