@@ -6,7 +6,7 @@
     <title>五線譜視奏練習 (Sheet Music Reader)</title>
     <meta name="description" content="練習認識五線譜音符的網頁應用程式">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
     <div class="app-container">
@@ -46,9 +46,9 @@
                         <option value="guitar">吉他指板 (Guitar)</option>
                     </select>
                 </label>
-                <label class="control-label checkbox-label" id="show-notes-container" style="display: none;">
+                <label class="control-label checkbox-label" id="show-notes-container">
                     <input type="checkbox" id="show-notes-checkbox" checked>
-                    <span>顯示指板音名</span>
+                    <span>顯示按鍵/指板音名</span>
                 </label>
                 <button id="cheat-sheet-btn" class="secondary-btn" style="margin-left: auto;">📖 音符對照表</button>
             </div>
@@ -155,6 +155,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="app.v15.js"></script>
+    <script src="app.v16.js"></script>
 </body>
 </html>

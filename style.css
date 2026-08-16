@@ -285,6 +285,7 @@ main {
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
+    transition: opacity 0.2s;
 }
 
 .piano-key.black .key-label {
@@ -400,10 +401,12 @@ main {
     line-height: 1.1;
 }
 
-.hide-notes .fret-note-label {
+.hide-notes .fret-note-label,
+.hide-notes .key-label {
     opacity: 0;
 }
-.hide-notes .guitar-fret.selected .fret-note-label {
+.hide-notes .guitar-fret.selected .fret-note-label,
+.hide-notes .piano-key.selected .key-label {
     opacity: 1; /* Always show note when selected */
 }
 
