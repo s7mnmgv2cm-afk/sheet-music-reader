@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五線譜視奏練習 (Sheet Music Reader)</title>
+    <meta name="description" content="練習認識五線譜音符的網頁應用程式">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <h1>五線譜視奏練習</h1>
+                <div class="score-board">
+                    <div class="score-item correct">
+                        <span class="label">答對</span>
+                        <span class="value" id="score-correct">0</span>
+                    </div>
+                    <div class="score-item incorrect">
+                        <span class="label">答錯</span>
+                        <span class="value" id="score-incorrect">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <label class="control-label">
+                    <span>譜號：</span>
+                    <select id="clef-select">
+                        <option value="treble">高音譜 (Treble)</option>
+                        <option value="bass">低音譜 (Bass)</option>
+                        <option value="both">混合隨機 (Both)</option>
+                    </select>
+                </label>
+                <label class="control-label checkbox-label">
+                    <input type="checkbox" id="accidentals-checkbox" checked>
+                    <span>包含升降記號</span>
+                </label>
+                <button id="cheat-sheet-btn" class="secondary-btn" style="margin-left: auto;">📖 音符對照表</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="staff-card">
+                <div class="staff-container" id="staff-container">
+                    <!-- VexFlow will render here -->
+                </div>
+                
+                <div class="feedback-overlay" id="feedback-overlay">
+                    <span class="feedback-text" id="feedback-text"></span>
+                </div>
+            </div>
+
+            <div class="interaction-area">
+                <div class="instruction">請問這是什麼音？</div>
+                
+                <div class="piano-keyboard" id="piano-keyboard">
+                    <div class="piano-key white" data-note="C" data-accidental="n"><span class="key-label">C<br><small>Do</small></span></div>
+                    <div class="piano-key black c-sharp" data-note="C" data-accidental="#"><span class="key-label">C♯<br><small>D♭</small></span></div>
+                    <div class="piano-key white" data-note="D" data-accidental="n"><span class="key-label">D<br><small>Re</small></span></div>
+                    <div class="piano-key black d-sharp" data-note="D" data-accidental="#"><span class="key-label">D♯<br><small>E♭</small></span></div>
+                    <div class="piano-key white" data-note="E" data-accidental="n"><span class="key-label">E<br><small>Mi</small></span></div>
+                    <div class="piano-key white" data-note="F" data-accidental="n"><span class="key-label">F<br><small>Fa</small></span></div>
+                    <div class="piano-key black f-sharp" data-note="F" data-accidental="#"><span class="key-label">F♯<br><small>G♭</small></span></div>
+                    <div class="piano-key white" data-note="G" data-accidental="n"><span class="key-label">G<br><small>Sol</small></span></div>
+                    <div class="piano-key black g-sharp" data-note="G" data-accidental="#"><span class="key-label">G♯<br><small>A♭</small></span></div>
+                    <div class="piano-key white" data-note="A" data-accidental="n"><span class="key-label">A<br><small>La</small></span></div>
+                    <div class="piano-key black a-sharp" data-note="A" data-accidental="#"><span class="key-label">A♯<br><small>B♭</small></span></div>
+                    <div class="piano-key white" data-note="B" data-accidental="n"><span class="key-label">B<br><small>Si</small></span></div>
+                </div>
+
+                <button class="submit-btn" id="submit-btn" disabled>確認答案 (Check)</button>
+            </div>
+            
+            <div class="history-area" id="history-area">
+                <h2>歷史紀錄 (History)</h2>
+                <div class="history-list" id="history-list">
+                    <!-- History items will be inserted here dynamically -->
+                </div>
+            </div>
+        </main>
+        
+        <!-- Cheat Sheet Modal -->
+        <div class="start-overlay hidden" id="cheat-sheet-overlay">
+            <div class="start-modal" style="max-width: 600px;">
+                <h2>音符對照表</h2>
+                <div class="controls" style="justify-content: center; width: 100%; box-shadow: none; padding: 0.5rem; margin-bottom: 0;">
+                    <label class="control-label">
+                        <span>譜號：</span>
+                        <select id="cheat-sheet-clef">
+                            <option value="treble">高音譜 (Treble)</option>
+                            <option value="bass">低音譜 (Bass)</option>
+                        </select>
+                    </label>
+                    <label class="control-label">
+                        <span>記號：</span>
+                        <select id="cheat-sheet-accidental">
+                            <option value="n">自然音 (Natural)</option>
+                            <option value="#">升記號 (Sharp)</option>
+                            <option value="b">降記號 (Flat)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="staff-container" id="cheat-sheet-staff" style="margin: 1rem 0;">
+                    <!-- VexFlow cheat sheet will render here -->
+                </div>
+                <button id="close-cheat-sheet-btn" class="primary-btn">關閉</button>
+            </div>
+        </div>
+
+        <!-- History Review Modal -->
+        <div class="start-overlay hidden" id="history-review-overlay">
+            <div class="start-modal" style="max-width: 400px;">
+                <h2 id="history-review-title">歷史紀錄檢視</h2>
+                <div class="staff-container" id="history-review-staff" style="margin: 1rem 0;">
+                    <!-- VexFlow history review will render here -->
+                </div>
+                <div class="history-review-details" id="history-review-details" style="font-size: 1.125rem; font-weight: bold; margin-bottom: 1rem; color: var(--text-primary);">
+                </div>
+                <button id="close-history-review-btn" class="primary-btn">關閉 (Close)</button>
+            </div>
+        </div>
+        
+        <!-- Start screen for Audio Context -->
+        <div class="start-overlay" id="start-overlay">
+            <div class="start-modal">
+                <div class="modal-icon">🎵</div>
+                <h2>歡迎來到五線譜視奏練習</h2>
+                <p>準備好挑戰您的讀譜速度了嗎？<br>我們將會發出琴聲，請確保您的音量已開啟。</p>
+                <button id="start-app-btn" class="primary-btn">開始練習</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="app.v12.js"></script>
+</body>
+</html>
