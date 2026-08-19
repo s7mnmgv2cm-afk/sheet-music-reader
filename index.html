@@ -47,6 +47,13 @@
                 </label>
                 <div style="flex-basis: 100%; height: 0;"></div>
                 <label class="control-label">
+                    <span>題目類型：</span>
+                    <select id="type-select">
+                        <option value="single">單音符 (Note)</option>
+                        <option value="chord">三和弦 (Triad)</option>
+                    </select>
+                </label>
+                <label class="control-label">
                     <span>作答介面：</span>
                     <select id="input-mode-select">
                         <option value="piano">鋼琴鍵盤 (Piano)</option>
@@ -162,6 +169,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="app.v23.js"></script>
+    <script src="app.v24.js"></script>
 </body>
 </html>
