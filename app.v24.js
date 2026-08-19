@@ -363,7 +363,7 @@ function renderStaff() {
     const stave = new VF.Stave(15, 40, staveWidth);
     
     // Add a clef (use the clef of the first note)
-    const clef = state.notes.length > 0 ? state.notes[0].clef : 'treble';
+    const clef = state.notes.length > 0 ? state.notes[0][0].clef : 'treble';
     stave.addClef(clef);
     
     // Connect it to the rendering context and draw
