@@ -31,7 +31,8 @@ let state = {
     currentChordInput: [], // Array of pitches selected for current chord
     selectedAnswer: {
         note: null,
-        accidental: 'n'
+        accidental: 'n',
+        octave: null
     },
     history: [],
     isPlaying: false
@@ -180,12 +181,13 @@ function setupEventListeners() {
                     state.currentChordInput = state.currentChordInput.filter(n => !(n.note === note && n.accidental === accidental));
                 } else {
                     keyEl.classList.add('selected');
-                    state.currentChordInput.push({ note, accidental });
+                    state.currentChordInput.push({ note, accidental, octave });
                 }
                 checkAnswer();
             } else {
                 state.selectedAnswer.note = note;
                 state.selectedAnswer.accidental = accidental;
+                state.selectedAnswer.octave = octave;
                 els.pianoKeys.forEach(b => b.classList.remove('selected'));
                 keyEl.classList.add('selected');
                 checkAnswer();
@@ -470,6 +472,7 @@ function updateScore() {
 function resetSelection() {
     state.selectedAnswer.note = null;
     state.selectedAnswer.accidental = 'n';
+    state.selectedAnswer.octave = null;
     state.currentChordInput = [];
     els.pianoKeys.forEach(k => k.classList.remove('selected'));
     document.querySelectorAll('.guitar-fret').forEach(f => f.classList.remove('selected'));
@@ -550,12 +553,13 @@ function generateGuitarFretboard() {
                     state.currentChordInput = state.currentChordInput.filter(n => !(n.note === note && n.accidental === accidental));
                 } else {
                     el.classList.add('selected');
-                    state.currentChordInput.push({ note, accidental });
+                    state.currentChordInput.push({ note, accidental, octave });
                 }
                 checkAnswer();
             } else {
                 state.selectedAnswer.note = note;
                 state.selectedAnswer.accidental = accidental;
+                state.selectedAnswer.octave = octave;
                 document.querySelectorAll('.guitar-fret').forEach(f => f.classList.remove('selected'));
                 els.pianoKeys.forEach(p => p.classList.remove('selected'));
                 el.classList.add('selected');
@@ -632,11 +636,13 @@ function checkAnswer() {
     let correctNoteString = activeItem.map(n => formatNote(n.key, n.accidental)).join(' ');
     let userNoteString = '';
     
+    const getAbsolutePitch = (n, acc, oct) => getPitchClass(n, acc) + (parseInt(oct) * 12);
+
     if (isChord) {
         if (state.currentChordInput.length < activeItem.length) return;
         
-        const correctPitches = activeItem.map(n => getPitchClass(n.key, n.accidental)).sort((a,b)=>a-b);
-        const selectedPitches = state.currentChordInput.map(n => getPitchClass(n.note, n.accidental)).sort((a,b)=>a-b);
+        const correctPitches = activeItem.map(n => getAbsolutePitch(n.key, n.accidental, n.octave)).sort((a,b)=>a-b);
+        const selectedPitches = state.currentChordInput.map(n => getAbsolutePitch(n.note, n.accidental, n.octave)).sort((a,b)=>a-b);
         
         isCorrect = correctPitches.length === selectedPitches.length && 
                     correctPitches.every((p, i) => p === selectedPitches[i]);
@@ -644,8 +650,8 @@ function checkAnswer() {
         userNoteString = state.currentChordInput.map(n => formatNote(n.note, n.accidental)).join(' ');
     } else {
         if (!state.selectedAnswer.note) return;
-        const correctPitch = getPitchClass(activeItem[0].key, activeItem[0].accidental);
-        const selectedPitch = getPitchClass(state.selectedAnswer.note, state.selectedAnswer.accidental);
+        const correctPitch = getAbsolutePitch(activeItem[0].key, activeItem[0].accidental, activeItem[0].octave);
+        const selectedPitch = getAbsolutePitch(state.selectedAnswer.note, state.selectedAnswer.accidental, state.selectedAnswer.octave);
         isCorrect = correctPitch === selectedPitch;
         userNoteString = formatNote(state.selectedAnswer.note, state.selectedAnswer.accidental);
     }
