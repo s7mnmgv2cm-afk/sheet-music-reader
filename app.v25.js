@@ -347,10 +347,10 @@ function generateQuestion() {
             const o1 = rootOctave;
             
             const n2 = noteNames[(rIdx + 2) % 7];
-            const o2 = (rIdx + 2 < rIdx) ? rootOctave + 1 : rootOctave;
+            const o2 = (rIdx + 2 >= 7) ? rootOctave + 1 : rootOctave;
             
             const n3 = noteNames[(rIdx + 4) % 7];
-            const o3 = (rIdx + 4 < rIdx) ? rootOctave + 1 : rootOctave;
+            const o3 = (rIdx + 4 >= 7) ? rootOctave + 1 : rootOctave;
             
             let acc1 = 'n', acc2 = 'n', acc3 = 'n';
             if (useAccidentals) {
@@ -371,12 +371,22 @@ function generateQuestion() {
             if (clef === 'treble' && note === 'A' && octave === 5) octave = 4;
             if (clef === 'treble' && note === 'B' && octave === 5) octave = 4;
             
+
             let accidental = 'n';
             if (useAccidentals) {
                 const rand = Math.random();
                 if (rand < 0.25) accidental = 'b';
                 else if (rand < 0.5) accidental = '#';
             }
+            
+            // PREVENT OUT OF BOUNDS NOTES
+            if (note === 'C' && accidental === 'b' && octave === octaveRange[0]) {
+                accidental = 'n'; // Cb at bottom of range -> B (below range), so remove flat
+            }
+            if (note === 'B' && accidental === '#' && octave === octaveRange[1]) {
+                accidental = 'n'; // B# at top of range -> C (above range), so remove sharp
+            }
+
             
             state.notes.push([{ key: note, accidental, octave, clef }]);
         }
@@ -410,8 +420,33 @@ function renderStaff() {
     const clef = state.notes.length > 0 ? state.notes[0][0].clef : 'treble';
     stave.addClef(clef);
     
+
     // Connect it to the rendering context and draw
     stave.setContext(context).draw();
+
+    // DYNAMICALLY UPDATE PIANO OCTAVES BASED ON CLEF
+    if (state.notes.length > 0) {
+        const currentClef = state.notes[0][0].clef;
+        const baseOctave = currentClef === 'bass' ? 2 : 4;
+        
+        // Update all 24 keys (14 white + 10 black)
+        const keys = document.querySelectorAll('.piano-key');
+        let currentNoteIndex = 0;
+        keys.forEach((keyEl) => {
+            const isOctave2 = currentNoteIndex >= 12; // 12 notes per octave
+            const oct = baseOctave + (isOctave2 ? 1 : 0);
+            keyEl.dataset.octave = oct;
+            
+            const label = keyEl.querySelector('.key-label');
+            if (label) {
+                const noteName = keyEl.dataset.note;
+                const acc = keyEl.dataset.accidental === '#' ? '♯' : '';
+                label.textContent = `${noteName}${acc}${oct}`;
+            }
+            currentNoteIndex++;
+        });
+    }
+
 
     if (state.notes.length > 0) {
         let vfNotes = [];
@@ -653,7 +688,13 @@ function checkAnswer() {
     let correctNoteString = activeItem.map(n => formatNote(n.key, n.accidental)).join(' ');
     let userNoteString = '';
     
-    const getAbsolutePitch = (n, acc, oct) => getPitchClass(n, acc) + (parseInt(oct) * 12);
+    const getAbsolutePitch = (n, acc, oct) => {
+        const basePitches = { 'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11 };
+        let pitch = basePitches[n] + (parseInt(oct) * 12);
+        if (acc === '#') pitch += 1;
+        if (acc === 'b') pitch -= 1;
+        return pitch;
+    };
 
     if (isChord) {
         if (state.currentChordInput.length < activeItem.length) return;
