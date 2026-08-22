@@ -93,17 +93,34 @@ function init() {
 
 function setupEventListeners() {
     els.startBtn.addEventListener('click', async () => {
-        // Initialize Audio Context on user gesture
-        await Tone.start();
-        synth = new Tone.PolySynth(Tone.Synth).toDestination();
-        // Make it sound a bit like a piano
-        synth.set({
-            oscillator: { type: "triangle" },
-            envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
-        });
+        els.startBtn.disabled = true;
+        els.startBtn.textContent = '載入真實琴音中...';
         
-        els.startOverlay.classList.add('hidden');
-        // The first note is already generated and rendered, just let them start answering
+        try {
+            await Tone.start();
+            synth = new Tone.Sampler({
+                urls: {
+                    "C3": "C3.mp3",
+                    "C4": "C4.mp3",
+                    "C5": "C5.mp3",
+                    "C6": "C6.mp3"
+                },
+                release: 1,
+                baseUrl: "https://tonejs.github.io/audio/salamander/"
+            }).toDestination();
+            
+            await Tone.loaded();
+            els.startOverlay.classList.add('hidden');
+        } catch (e) {
+            console.error(e);
+            // Fallback to basic synth if network fails
+            synth = new Tone.PolySynth(Tone.Synth).toDestination();
+            synth.set({
+                oscillator: { type: "triangle" },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
+            });
+            els.startOverlay.classList.add('hidden');
+        }
     });
 
     els.clefSelect.addEventListener('change', generateNextQuestion);
