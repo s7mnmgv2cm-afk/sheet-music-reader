@@ -246,18 +246,33 @@ main {
     color: var(--text-primary);
 }
 
+.piano-wrapper {
+    width: 100%;
+    max-width: 900px; /* Wider for 2 octaves */
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px 8px 12px 12px;
+    box-shadow: inset 0 -4px 0 #000, 0 8px 16px rgba(0,0,0,0.2);
+    background-color: #111;
+    padding: 8px 8px 12px 8px;
+}
+
 .piano-keyboard {
     display: flex;
     position: relative;
     height: 200px;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+    min-width: 800px; /* Ensure keys don't shrink too much */
     user-select: none;
-    background-color: #111;
-    border-radius: 8px 8px 12px 12px;
-    padding: 8px 8px 12px 8px;
-    box-shadow: inset 0 -4px 0 #000, 0 8px 16px rgba(0,0,0,0.2);
+}
+
+@media (orientation: landscape) {
+    .piano-wrapper {
+        max-width: 100%;
+    }
+    .piano-keyboard {
+        min-width: 100%; /* Fit screen perfectly in landscape */
+    }
 }
 
 .piano-keyboard.hidden {
@@ -294,7 +309,7 @@ main {
 
 .piano-key.black {
     position: absolute;
-    width: calc(100% / 7 * 0.6);
+    width: calc(100% / 14 * 0.65);
     height: 60%;
     background-color: #222;
     color: white;
@@ -331,12 +346,18 @@ main {
     font-weight: 600;
 }
 
-/* Positions for black keys */
-.piano-key.black.c-sharp { left: calc(100% / 7 * 1); }
-.piano-key.black.d-sharp { left: calc(100% / 7 * 2); }
-.piano-key.black.f-sharp { left: calc(100% / 7 * 4); }
-.piano-key.black.g-sharp { left: calc(100% / 7 * 5); }
-.piano-key.black.a-sharp { left: calc(100% / 7 * 6); }
+/* Positions for black keys (14 total white keys) */
+.piano-key.black.c-sharp { left: calc(100% / 14 * 1); }
+.piano-key.black.d-sharp { left: calc(100% / 14 * 2); }
+.piano-key.black.f-sharp { left: calc(100% / 14 * 4); }
+.piano-key.black.g-sharp { left: calc(100% / 14 * 5); }
+.piano-key.black.a-sharp { left: calc(100% / 14 * 6); }
+
+.piano-key.black.c-sharp-5 { left: calc(100% / 14 * 8); }
+.piano-key.black.d-sharp-5 { left: calc(100% / 14 * 9); }
+.piano-key.black.f-sharp-5 { left: calc(100% / 14 * 11); }
+.piano-key.black.g-sharp-5 { left: calc(100% / 14 * 12); }
+.piano-key.black.a-sharp-5 { left: calc(100% / 14 * 13); }
 
 /* Guitar Fretboard */
 .guitar-fretboard-wrapper {

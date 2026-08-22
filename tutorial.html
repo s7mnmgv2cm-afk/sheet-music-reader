@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樂理小教室：升降記號與和弦</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --bg-color: #f5f7fa;
+            --surface-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e4e8;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .section {
+            background: var(--surface-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        h3 {
+            color: #555;
+            margin-top: 1.5rem;
+        }
+        .symbol {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background: #eef5fc;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .keyboard-illustration {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        .white-key {
+            width: 40px;
+            height: 150px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0 0 4px 4px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .black-key {
+            width: 28px;
+            height: 90px;
+            background: #333;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            top: 0;
+            color: white;
+            font-size: 0.7rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 5px;
+            z-index: 2;
+        }
+        .note-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .chord-example {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .chord-note {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+        }
+        .chord-note.minor {
+            background: #9b59b6;
+            box-shadow: 0 4px 8px rgba(155, 89, 182, 0.3);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎓 樂理小教室</h1>
+        <p>快速搞懂升降記號與三和弦的基礎概念</p>
+    </header>
+
+    <div class="section">
+        <h2>一、什麼是升降記號？</h2>
+        <p>在音樂中，相鄰的兩個琴鍵（不論黑白）之間的距離稱為<strong>「半音」</strong>。升降記號就是用來把音符<strong>調高</strong>或<strong>調低</strong>半音的符號。</p>
+        
+        <div class="note-box">
+            <p><span class="symbol">♯ (升記號 Sharp)</span>：將原本的音<strong>提高半個音</strong>。在鋼琴上，就是往<strong>右邊</strong>找下一個緊鄰的鍵。</p>
+            <p><span class="symbol">♭ (降記號 Flat)</span>：將原本的音<strong>降低半個音</strong>。在鋼琴上，就是往<strong>左邊</strong>找下一個緊鄰的鍵。</p>
+        </div>
+
+        <div class="keyboard-illustration">
+            <!-- White Keys -->
+            <div class="white-key" style="margin-right: 0;">C</div>
+            <div class="white-key" style="margin-right: 0;">D</div>
+            <div class="white-key" style="margin-right: 0;">E</div>
+            <div class="white-key" style="margin-right: 0;">F</div>
+            <div class="white-key" style="margin-right: 0;">G</div>
+            <div class="white-key" style="margin-right: 0;">A</div>
+            <div class="white-key">B</div>
+            
+            <!-- Black Keys -->
+            <div class="black-key" style="left: 27px;">C♯<br>D♭</div>
+            <div class="black-key" style="left: 69px;">D♯<br>E♭</div>
+            <div class="black-key" style="left: 153px;">F♯<br>G♭</div>
+            <div class="black-key" style="left: 195px;">G♯<br>A♭</div>
+            <div class="black-key" style="left: 237px;">A♯<br>B♭</div>
+        </div>
+        <p style="text-align: center; font-size: 0.9rem; color: #666;">同一個黑鍵，可以看作是左邊白鍵的「升」，也可以看作是右邊白鍵的「降」。</p>
+    </div>
+
+    <div class="section">
+        <h2>二、什麼是和弦 (Chord)？</h2>
+        <p>和弦就是<strong>「三個或以上的音符同時彈奏」</strong>。我們練習中最常見的是<strong>三和弦 (Triad)</strong>，它由三個音組成，分別稱為：</p>
+        <ul>
+            <li><strong>根音 (Root)</strong>：和弦的基礎音，也是和弦命名的依據（例如 C 和弦的根音就是 C）。</li>
+            <li><strong>三音 (Third)</strong>：決定這個和弦聽起來是「開心」還是「悲傷」的關鍵音。</li>
+            <li><strong>五音 (Fifth)</strong>：增加和弦厚度與穩定感的音。</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>三、大三和弦 vs 小三和弦</h2>
+        <p>和弦有很多種，最基礎的兩種是<strong>大和弦 (Major)</strong> 與 <strong>小和弦 (Minor)</strong>。它們的差別主要在於<strong>「三音」</strong>的位置。</p>
+        
+        <h3>1. 大三和弦 (Major Triad)</h3>
+        <p>聽起來明亮、開朗。常見的 C 大和弦 (C Major) 由 <strong>C、E、G</strong> 組成。不需要任何升降記號。</p>
+        <div class="chord-example">
+            <div class="chord-note">C</div>
+            <div class="chord-note">E</div>
+            <div class="chord-note">G</div>
+        </div>
+
+        <h3>2. 小三和弦 (Minor Triad) & 降記號的應用</h3>
+        <p>聽起來比較憂鬱、悲傷。要將一個「大和弦」變成「小和弦」，最簡單的方法就是<strong>將中間的「三音」降半音</strong>。</p>
+        <p>例如 C 小和弦 (C minor, 常寫作 Cm)，就是把原本的 E 加上<strong>降記號 (♭)</strong> 變成 E♭：</p>
+        <div class="chord-example">
+            <div class="chord-note minor">C</div>
+            <div class="chord-note minor">E♭</div>
+            <div class="chord-note minor">G</div>
+        </div>
+
+        <h3>3. 其他需要升降記號的和弦</h3>
+        <p>並不是所有的大和弦都只由白鍵組成。例如 <strong>D 大和弦 (D Major)</strong>，為了維持大和弦「明亮」的音階距離，它的三音必須是 F♯：</p>
+        <div class="chord-example">
+            <div class="chord-note">D</div>
+            <div class="chord-note">F♯</div>
+            <div class="chord-note">A</div>
+        </div>
+        <p>如果您想彈奏 D 小和弦 (Dm)，就把中間的 F♯ 降半音（還原成 F），就會變成 <strong>D、F、A</strong> 囉！</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="back-link">← 回到視奏練習</a>
+    </div>
+</div>
+
+</body>
+</html>

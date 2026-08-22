@@ -27,6 +27,14 @@
             
             <div class="controls">
                 <label class="control-label">
+                    <span>App 模式：</span>
+                    <select id="app-mode-select">
+                        <option value="practice">練習模式 (Practice)</option>
+                        <option value="play">自由彈奏 (Play)</option>
+                    </select>
+                </label>
+                <div style="flex-basis: 100%; height: 0;"></div>
+                <label class="control-label">
                     <span>譜號：</span>
                     <select id="clef-select">
                         <option value="treble">高音譜 (Treble)</option>
@@ -64,7 +72,10 @@
                     <input type="checkbox" id="show-notes-checkbox" checked>
                     <span>顯示按鍵/指板音名</span>
                 </label>
-                <button id="cheat-sheet-btn" class="secondary-btn" style="margin-left: auto;">📖 音符對照表</button>
+                <div class="header-buttons" style="margin-left: auto; display: flex; gap: 0.5rem;">
+                    <a href="tutorial.html" target="_blank" class="secondary-btn" style="text-decoration: none;">🎓 樂理小教室</a>
+                    <button id="cheat-sheet-btn" class="secondary-btn">📖 音符對照表</button>
+                </div>
             </div>
         </header>
 
@@ -82,19 +93,36 @@
             <div class="interaction-area">
                 <div class="instruction">請問這是什麼音？</div>
                 
-                <div class="piano-keyboard" id="piano-keyboard">
-                    <div class="piano-key white" data-note="C" data-accidental="n"><span class="key-label">C<br><small>Do</small></span></div>
-                    <div class="piano-key black c-sharp" data-note="C" data-accidental="#"><span class="key-label">C♯<br><small>D♭</small></span></div>
-                    <div class="piano-key white" data-note="D" data-accidental="n"><span class="key-label">D<br><small>Re</small></span></div>
-                    <div class="piano-key black d-sharp" data-note="D" data-accidental="#"><span class="key-label">D♯<br><small>E♭</small></span></div>
-                    <div class="piano-key white" data-note="E" data-accidental="n"><span class="key-label">E<br><small>Mi</small></span></div>
-                    <div class="piano-key white" data-note="F" data-accidental="n"><span class="key-label">F<br><small>Fa</small></span></div>
-                    <div class="piano-key black f-sharp" data-note="F" data-accidental="#"><span class="key-label">F♯<br><small>G♭</small></span></div>
-                    <div class="piano-key white" data-note="G" data-accidental="n"><span class="key-label">G<br><small>Sol</small></span></div>
-                    <div class="piano-key black g-sharp" data-note="G" data-accidental="#"><span class="key-label">G♯<br><small>A♭</small></span></div>
-                    <div class="piano-key white" data-note="A" data-accidental="n"><span class="key-label">A<br><small>La</small></span></div>
-                    <div class="piano-key black a-sharp" data-note="A" data-accidental="#"><span class="key-label">A♯<br><small>B♭</small></span></div>
-                    <div class="piano-key white" data-note="B" data-accidental="n"><span class="key-label">B<br><small>Si</small></span></div>
+                <div class="piano-wrapper" id="piano-wrapper">
+                    <div class="piano-keyboard" id="piano-keyboard">
+                        <!-- Octave 4 -->
+                        <div class="piano-key white" data-note="C" data-accidental="n" data-octave="4"><span class="key-label">C4</span></div>
+                        <div class="piano-key black c-sharp" data-note="C" data-accidental="#" data-octave="4"><span class="key-label">C♯</span></div>
+                        <div class="piano-key white" data-note="D" data-accidental="n" data-octave="4"><span class="key-label">D4</span></div>
+                        <div class="piano-key black d-sharp" data-note="D" data-accidental="#" data-octave="4"><span class="key-label">D♯</span></div>
+                        <div class="piano-key white" data-note="E" data-accidental="n" data-octave="4"><span class="key-label">E4</span></div>
+                        <div class="piano-key white" data-note="F" data-accidental="n" data-octave="4"><span class="key-label">F4</span></div>
+                        <div class="piano-key black f-sharp" data-note="F" data-accidental="#" data-octave="4"><span class="key-label">F♯</span></div>
+                        <div class="piano-key white" data-note="G" data-accidental="n" data-octave="4"><span class="key-label">G4</span></div>
+                        <div class="piano-key black g-sharp" data-note="G" data-accidental="#" data-octave="4"><span class="key-label">G♯</span></div>
+                        <div class="piano-key white" data-note="A" data-accidental="n" data-octave="4"><span class="key-label">A4</span></div>
+                        <div class="piano-key black a-sharp" data-note="A" data-accidental="#" data-octave="4"><span class="key-label">A♯</span></div>
+                        <div class="piano-key white" data-note="B" data-accidental="n" data-octave="4"><span class="key-label">B4</span></div>
+                        
+                        <!-- Octave 5 -->
+                        <div class="piano-key white" data-note="C" data-accidental="n" data-octave="5"><span class="key-label">C5</span></div>
+                        <div class="piano-key black c-sharp-5" data-note="C" data-accidental="#" data-octave="5"><span class="key-label">C♯</span></div>
+                        <div class="piano-key white" data-note="D" data-accidental="n" data-octave="5"><span class="key-label">D5</span></div>
+                        <div class="piano-key black d-sharp-5" data-note="D" data-accidental="#" data-octave="5"><span class="key-label">D♯</span></div>
+                        <div class="piano-key white" data-note="E" data-accidental="n" data-octave="5"><span class="key-label">E5</span></div>
+                        <div class="piano-key white" data-note="F" data-accidental="n" data-octave="5"><span class="key-label">F5</span></div>
+                        <div class="piano-key black f-sharp-5" data-note="F" data-accidental="#" data-octave="5"><span class="key-label">F♯</span></div>
+                        <div class="piano-key white" data-note="G" data-accidental="n" data-octave="5"><span class="key-label">G5</span></div>
+                        <div class="piano-key black g-sharp-5" data-note="G" data-accidental="#" data-octave="5"><span class="key-label">G♯</span></div>
+                        <div class="piano-key white" data-note="A" data-accidental="n" data-octave="5"><span class="key-label">A5</span></div>
+                        <div class="piano-key black a-sharp-5" data-note="A" data-accidental="#" data-octave="5"><span class="key-label">A♯</span></div>
+                        <div class="piano-key white" data-note="B" data-accidental="n" data-octave="5"><span class="key-label">B5</span></div>
+                    </div>
                 </div>
 
                 <div class="guitar-fretboard-wrapper hidden" id="guitar-wrapper">
@@ -169,6 +197,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="app.v24.js"></script>
+    <script src="app.v25.js"></script>
 </body>
 </html>
