@@ -642,3 +642,23 @@ main {
         min-width: calc(25% - 0.5rem);
     }
 }
+
+/* Song Mode Styles */
+.playback-cursor {
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    width: 4px;
+    background-color: rgba(74, 144, 226, 0.5);
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.8);
+    border-radius: 2px;
+    z-index: 10;
+    /* Transition handled by JS */
+}
+.playback-cursor.hidden {
+    display: none;
+}
+
+.staff-container.song-mode svg {
+    transform: none !important;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+</head>
+<body>
+    <button id="btn">Play</button>
+    <button id="stop">Stop</button>
+    <script>
+        const sampler = new Tone.Sampler({
+            urls: { "C4": "C4.mp3" },
+            baseUrl: "https://tonejs.github.io/audio/salamander/"
+        }).toDestination();
+        
+        document.getElementById('btn').addEventListener('mousedown', async () => {
+            await Tone.start();
+            sampler.triggerAttack("C4");
+            console.log("Attack C4");
+        });
+        document.getElementById('stop').addEventListener('mousedown', () => {
+            sampler.triggerRelease("C4");
+            console.log("Release C4");
+        });
+    </script>
+</body>
+</html>
