@@ -677,3 +677,7 @@ main {
 .piano-wrapper.single-octave {
     max-width: 450px !important;
 }
+
+.piano-wrapper.single-octave .piano-keyboard {
+    min-width: 100% !important;
+}
