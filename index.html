@@ -6,7 +6,7 @@
     <title>五線譜視奏練習 (Sheet Music Reader)</title>
     <meta name="description" content="練習認識五線譜音符的網頁應用程式">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=17">
+    <link rel="stylesheet" href="style.css?v=40">
 </head>
 <body>
     <div class="app-container">
@@ -70,6 +70,10 @@
                     </select>
                 </label>
                 <div style="flex-basis: 100%; height: 0;"></div>
+                                <label class="control-label" style="background-color: #f1f8ff; border: 1px solid #3498db; border-radius: 6px; padding: 4px 8px;">
+                    <input type="checkbox" id="ignore-octave-checkbox">
+                    🎹 單一八度
+                </label>
                 <label class="control-label">
                     <span>題目類型：</span>
                     <select id="type-select">
@@ -114,32 +118,32 @@
                 <div class="piano-wrapper" id="piano-wrapper">
                     <div class="piano-keyboard" id="piano-keyboard">
                         <!-- Octave 4 -->
-                        <div class="piano-key white" data-note="C" data-accidental="n" data-octave="4"><span class="key-label">C4</span></div>
-                        <div class="piano-key black c-sharp" data-note="C" data-accidental="#" data-octave="4"><span class="key-label">C♯</span></div>
-                        <div class="piano-key white" data-note="D" data-accidental="n" data-octave="4"><span class="key-label">D4</span></div>
-                        <div class="piano-key black d-sharp" data-note="D" data-accidental="#" data-octave="4"><span class="key-label">D♯</span></div>
-                        <div class="piano-key white" data-note="E" data-accidental="n" data-octave="4"><span class="key-label">E4</span></div>
-                        <div class="piano-key white" data-note="F" data-accidental="n" data-octave="4"><span class="key-label">F4</span></div>
-                        <div class="piano-key black f-sharp" data-note="F" data-accidental="#" data-octave="4"><span class="key-label">F♯</span></div>
-                        <div class="piano-key white" data-note="G" data-accidental="n" data-octave="4"><span class="key-label">G4</span></div>
-                        <div class="piano-key black g-sharp" data-note="G" data-accidental="#" data-octave="4"><span class="key-label">G♯</span></div>
-                        <div class="piano-key white" data-note="A" data-accidental="n" data-octave="4"><span class="key-label">A4</span></div>
-                        <div class="piano-key black a-sharp" data-note="A" data-accidental="#" data-octave="4"><span class="key-label">A♯</span></div>
-                        <div class="piano-key white" data-note="B" data-accidental="n" data-octave="4"><span class="key-label">B4</span></div>
+                        <div class="piano-key oct-1 white" data-note="C" data-accidental="n" data-octave="4"><span class="key-label">C4</span></div>
+                        <div class="piano-key oct-1 black c-sharp" data-note="C" data-accidental="#" data-octave="4"><span class="key-label">C♯</span></div>
+                        <div class="piano-key oct-1 white" data-note="D" data-accidental="n" data-octave="4"><span class="key-label">D4</span></div>
+                        <div class="piano-key oct-1 black d-sharp" data-note="D" data-accidental="#" data-octave="4"><span class="key-label">D♯</span></div>
+                        <div class="piano-key oct-1 white" data-note="E" data-accidental="n" data-octave="4"><span class="key-label">E4</span></div>
+                        <div class="piano-key oct-1 white" data-note="F" data-accidental="n" data-octave="4"><span class="key-label">F4</span></div>
+                        <div class="piano-key oct-1 black f-sharp" data-note="F" data-accidental="#" data-octave="4"><span class="key-label">F♯</span></div>
+                        <div class="piano-key oct-1 white" data-note="G" data-accidental="n" data-octave="4"><span class="key-label">G4</span></div>
+                        <div class="piano-key oct-1 black g-sharp" data-note="G" data-accidental="#" data-octave="4"><span class="key-label">G♯</span></div>
+                        <div class="piano-key oct-1 white" data-note="A" data-accidental="n" data-octave="4"><span class="key-label">A4</span></div>
+                        <div class="piano-key oct-1 black a-sharp" data-note="A" data-accidental="#" data-octave="4"><span class="key-label">A♯</span></div>
+                        <div class="piano-key oct-1 white" data-note="B" data-accidental="n" data-octave="4"><span class="key-label">B4</span></div>
                         
                         <!-- Octave 5 -->
-                        <div class="piano-key white" data-note="C" data-accidental="n" data-octave="5"><span class="key-label">C5</span></div>
-                        <div class="piano-key black c-sharp-5" data-note="C" data-accidental="#" data-octave="5"><span class="key-label">C♯</span></div>
-                        <div class="piano-key white" data-note="D" data-accidental="n" data-octave="5"><span class="key-label">D5</span></div>
-                        <div class="piano-key black d-sharp-5" data-note="D" data-accidental="#" data-octave="5"><span class="key-label">D♯</span></div>
-                        <div class="piano-key white" data-note="E" data-accidental="n" data-octave="5"><span class="key-label">E5</span></div>
-                        <div class="piano-key white" data-note="F" data-accidental="n" data-octave="5"><span class="key-label">F5</span></div>
-                        <div class="piano-key black f-sharp-5" data-note="F" data-accidental="#" data-octave="5"><span class="key-label">F♯</span></div>
-                        <div class="piano-key white" data-note="G" data-accidental="n" data-octave="5"><span class="key-label">G5</span></div>
-                        <div class="piano-key black g-sharp-5" data-note="G" data-accidental="#" data-octave="5"><span class="key-label">G♯</span></div>
-                        <div class="piano-key white" data-note="A" data-accidental="n" data-octave="5"><span class="key-label">A5</span></div>
-                        <div class="piano-key black a-sharp-5" data-note="A" data-accidental="#" data-octave="5"><span class="key-label">A♯</span></div>
-                        <div class="piano-key white" data-note="B" data-accidental="n" data-octave="5"><span class="key-label">B5</span></div>
+                        <div class="piano-key oct-2 white" data-note="C" data-accidental="n" data-octave="5"><span class="key-label">C5</span></div>
+                        <div class="piano-key oct-2 black c-sharp-5" data-note="C" data-accidental="#" data-octave="5"><span class="key-label">C♯</span></div>
+                        <div class="piano-key oct-2 white" data-note="D" data-accidental="n" data-octave="5"><span class="key-label">D5</span></div>
+                        <div class="piano-key oct-2 black d-sharp-5" data-note="D" data-accidental="#" data-octave="5"><span class="key-label">D♯</span></div>
+                        <div class="piano-key oct-2 white" data-note="E" data-accidental="n" data-octave="5"><span class="key-label">E5</span></div>
+                        <div class="piano-key oct-2 white" data-note="F" data-accidental="n" data-octave="5"><span class="key-label">F5</span></div>
+                        <div class="piano-key oct-2 black f-sharp-5" data-note="F" data-accidental="#" data-octave="5"><span class="key-label">F♯</span></div>
+                        <div class="piano-key oct-2 white" data-note="G" data-accidental="n" data-octave="5"><span class="key-label">G5</span></div>
+                        <div class="piano-key oct-2 black g-sharp-5" data-note="G" data-accidental="#" data-octave="5"><span class="key-label">G♯</span></div>
+                        <div class="piano-key oct-2 white" data-note="A" data-accidental="n" data-octave="5"><span class="key-label">A5</span></div>
+                        <div class="piano-key oct-2 black a-sharp-5" data-note="A" data-accidental="#" data-octave="5"><span class="key-label">A♯</span></div>
+                        <div class="piano-key oct-2 white" data-note="B" data-accidental="n" data-octave="5"><span class="key-label">B5</span></div>
                     </div>
                 </div>
 
@@ -216,6 +220,6 @@
     <script src="https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script src="songs.js"></script>
-    <script src="app.v34.js"></script>
+    <script src="app.v41.js"></script>
 </body>
 </html>

@@ -662,3 +662,18 @@ main {
 .staff-container.song-mode svg {
     transform: none !important;
 }
+
+.single-octave .oct-2 { display: none !important; }
+
+/* Fix piano layout when single octave mode is active */
+.piano-wrapper.single-octave .piano-key.black.c-sharp { left: calc(100% / 7 * 1); }
+.piano-wrapper.single-octave .piano-key.black.d-sharp { left: calc(100% / 7 * 2); }
+.piano-wrapper.single-octave .piano-key.black.f-sharp { left: calc(100% / 7 * 4); }
+.piano-wrapper.single-octave .piano-key.black.g-sharp { left: calc(100% / 7 * 5); }
+.piano-wrapper.single-octave .piano-key.black.a-sharp { left: calc(100% / 7 * 6); }
+.piano-wrapper.single-octave .piano-key.black {
+    width: calc(100% / 7 * 0.65);
+}
+.piano-wrapper.single-octave {
+    max-width: 450px !important;
+}
